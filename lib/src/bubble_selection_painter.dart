@@ -10,7 +10,7 @@ class BubblePainter extends CustomPainter {
     required this.bubbleRadius,
     required this.maxBubbleRadius,
     this.bubbleColor = Colors.purple,
-  })  : endColor = Color.lerp(bubbleColor, Colors.white, 0.8),
+  })  : endColor = Color.lerp(bubbleColor, Colors.transparent, 0.8),
         super();
 
   @override

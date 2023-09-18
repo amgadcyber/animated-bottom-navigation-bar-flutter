@@ -326,21 +326,20 @@ class _AnimatedBottomNavigationBarState
       curve: Curves.linear,
     );
 
-    Tween<double>(begin: 0, end: 1).animate(bubbleCurve)
-      ..addListener(() {
-        setState(() {
-          _bubbleRadius = widget.splashRadius * bubbleCurve.value;
-          if (_bubbleRadius == widget.splashRadius) {
-            _bubbleRadius = 0;
-          }
+    Tween<double>(begin: 0, end: 1).animate(bubbleCurve).addListener(() {
+      setState(() {
+        _bubbleRadius = widget.splashRadius * bubbleCurve.value;
+        if (_bubbleRadius == widget.splashRadius) {
+          _bubbleRadius = 0;
+        }
 
-          if (bubbleCurve.value < 0.5) {
-            _iconScale = 1 + bubbleCurve.value;
-          } else {
-            _iconScale = 2 - bubbleCurve.value;
-          }
-        });
+        if (bubbleCurve.value < 0.5) {
+          _iconScale = 1 + bubbleCurve.value;
+        } else {
+          _iconScale = 2 - bubbleCurve.value;
+        }
       });
+    });
 
     if (_bubbleController.isAnimating) {
       _bubbleController.reset();
@@ -385,7 +384,8 @@ class _AnimatedBottomNavigationBarState
   Widget _buildBottomBar() {
     return Material(
       clipBehavior: Clip.antiAlias,
-      color: widget.backgroundColor ?? Colors.white,
+      color: widget.backgroundColor ??
+          Theme.of(context).bottomNavigationBarTheme.backgroundColor,
       child: SafeArea(
         left: widget.safeAreaValues.left,
         top: widget.safeAreaValues.top,
@@ -407,7 +407,7 @@ class _AnimatedBottomNavigationBarState
     return Container(
       height: widget.height ?? kBottomNavigationBarHeight,
       decoration: BoxDecoration(
-        color: widget.backgroundColor ?? Colors.white,
+        color: widget.backgroundColor,
         gradient: widget.backgroundGradient,
       ),
       child: Row(
